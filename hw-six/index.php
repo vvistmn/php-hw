@@ -9,12 +9,20 @@ abstract class Product
 	public $name;
 	public $price;
 	public $weight;
+	public static $companyName = 'VRDNT';
+	const YEAR_START = 2019;
 
 	public function __construct( string $name, int $price, int $weight) 
 	{
 		$this->name = $name;
 		$this->price = $price;
 		$this->weight = $weight;
+	}
+
+	public static function showCompanyInfo()
+	{
+		echo "Наша компания называется - " . self::$companyName . ". Год ее основания: " . self::YEAR_START . "<br>";
+		echo "<br>";
 	}
 
 	public function InfoProduct()
@@ -44,6 +52,11 @@ class Chocolate extends Product
 		parent::__construct($name, $price, $weight);
 	}
 
+	public function __set($name, $value)
+	{
+		echo "Вы не можете присвоить значение $value не существующему свойству $name <br>";
+	}
+
 	public function InfoProduct()
 	{
 		echo "Это товар, который называется $this->name, он стоит $this->price рублей. Его вес составляет $this->weight грамм. Калорий у $this->name = $this->cal <br>";
@@ -69,6 +82,11 @@ class Candy extends Product
 		parent::__construct($name, $price, $weight);
 	}
 
+	public function __get($name)
+	{
+		echo "Нельзя обращаться ко свойству с именем $name <br>";
+	}
+
 	public function InfoProduct()
 	{
 		echo "Это товар, который называется $this->name, он стоит $this->price рублей. Его вес составляет $this->weight грамм. Калорий у $this->name = $this->cal <br>";
@@ -86,10 +104,18 @@ class Candy extends Product
 $milkaChocolate = new Chocolate('милка', 99, 250, 300, 'milka.jpg');
 $milkaChocolate -> InfoProduct();
 $milkaChocolate -> ShowImage();
+$milkaChocolate -> showCompanyInfo();
 
 
 $milkaCandy = new Candy('степ', 2, 20, 'step.jpg');
 $milkaCandy -> InfoProduct();
 $milkaCandy -> ShowImages();
+$milkaCandy -> showCompanyInfo();
 
 
+echo Product::showCompanyInfo() . '<br>';
+echo Product::$companyName . '<br>';
+echo Product::YEAR_START . '<br>';
+
+$milkaChocolate -> gulp = V5 . '<br>';
+$milkaCandy -> scss . '<br>';
